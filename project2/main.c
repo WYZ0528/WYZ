@@ -4,7 +4,7 @@ int main(){
     int ret = -1;
     int size = -1;
     char read_buf[1024] = {0};
-    char write_buf[32] = "hello world";
+    char write_buf[32] = "This is,too.";
 
     /* lseek后，读取文件 */
     printf("-------------READ--------------------\n");
