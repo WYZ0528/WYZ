@@ -1,25 +1,36 @@
 #include"uhead.h"
 
-void uwrite(const char *file_name,int *array,int size){
-    int *handle;
-    if((handle=open(file_name,O_WRONLY | O_CREATE | O_TRUNC, S_IRWXU | S_IRWXG | S_IRWXO))==-1){
-        printf("Error!\n");
-        exit(1);
-    }
-    for(int x=0;x<size;x++){
-        write(handle,array+x,sizeof(*array));
-    }
-    close(handle);
+void readfile(char* path)
+{
+	FILE *fp;
+	int len; 
+	char buf[100]={0};
+	if((fp = fopen(path,"r+"))==NULL)
+	{
+		printf("file cannnot open \n");	
+		exit(0);
+	}
+	else
+	while (fgets(buf,100,fp)!=NULL)
+{
+		len = strlen(buf);
+		buf[len-1]='\0';
+		printf("%s\n",buf);
+}
+	fclose(fp);
 }
 
-void uread(const char *file_name,int *array,int size){
-    int *handle;
-    if((handle=open(file_name,O_RDONLY|O_BINARY,S_IWRITE|S_IREAD))==-1){
-        printf("Error!\n");
-        exit(1);
-    }
-    for(int x=0;x<size;x++){
-        read(handle,array+x,sizeof(*array));
-    }
-    close(handle);
+void addfile(char * append,char * path)
+{
+	FILE *fp;
+	char buf[301];
+	if((fp=fopen(path,"w+"))==NULL)
+	{
+		printf("file cannot open!\n");
+	}
+	else{
+		strcpy(buf,append);
+		fputs(buf,fp);
+	}
+	fclose(fp);
 }
